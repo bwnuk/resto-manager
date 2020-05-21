@@ -1,5 +1,6 @@
 package com.github.wnuk.restomanager
 
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -7,5 +8,5 @@ import org.springframework.boot.runApplication
 class RestoManagerApplication
 
 fun main(args: Array<String>) {
-    runApplication<RestoManagerApplication>(*args)
+    SpringApplication.run(RestoManagerApplication::class.java, *args)
 }

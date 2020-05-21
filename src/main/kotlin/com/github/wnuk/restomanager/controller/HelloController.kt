@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class HelloController{
 
-    @GetMapping("/hello")
-    fun helloKotlin(): ResponseEntity<String>{
+    @GetMapping("/status")
+    fun statusServer(): ResponseEntity<String>{
         return ResponseEntity.ok("Hello World")
     }
 }
