@@ -7,7 +7,9 @@ interface UserService {
 
     fun createUser(user: UserDto): UserDto?
 
-    fun getUser(id: Long): UserDto?
+    fun getUserId(id: Long): UserDto?
 
     fun getAllUsers(): List<UserDto>
+
+    fun getUserByUsername(username: String): UserDto?
 }

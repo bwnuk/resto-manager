@@ -14,12 +14,12 @@ class UserServiceImpl(private val repository: UserRepository): UserService {
 
     override fun deleteUser(id: Long) {
         repository.deleteById(id)
-
     }
 
     override fun createUser(user: UserDto): UserDto {
-        if (repository.findAllByUsername(user.username).isNullOrEmpty()){
-        }
+/*        if (repository.findAllByUsername(user.username).isNullOrEmpty()){
+            TODO()
+        }*/
 
         val userDao = user.toUserDao()
         repository.save(userDao)
@@ -27,7 +27,7 @@ class UserServiceImpl(private val repository: UserRepository): UserService {
         return userDao.toUserDto()
     }
 
-    override fun getUser(id: Long): UserDto? {
+    override fun getUserId(id: Long): UserDto? {
         val user = repository.findById(id)
         user.let {
             return it.get().toUserDto()
@@ -36,5 +36,9 @@ class UserServiceImpl(private val repository: UserRepository): UserService {
 
     override fun getAllUsers(): List<UserDto> {
         return repository.findAll().map { it.toUserDto() }
+    }
+
+    override fun getUserByUsername(username: String): UserDto? {
+        return repository.findByUsername(username)?.toUserDto()
     }
 }

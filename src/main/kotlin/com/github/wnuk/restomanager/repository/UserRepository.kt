@@ -8,7 +8,7 @@ import java.util.*
 @Repository
 interface UserRepository : JpaRepository<UserDao, Long> {
     fun findAllByFirstname(name: String): MutableList<UserDao>?
-    fun findAllByUsername(name: String): MutableList<UserDao>?
+    fun findByUsername(name: String): UserDao?
     override fun findById(id: Long): Optional<UserDao>
     override fun deleteById(id: Long)
 }

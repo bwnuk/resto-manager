@@ -2,7 +2,6 @@ package com.github.wnuk.restomanager.controller
 
 import com.github.wnuk.restomanager.dto.UserDto
 import com.github.wnuk.restomanager.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -21,7 +20,7 @@ class UserController(private var service: UserService) {
     }
 
     @GetMapping("")
-    fun getUser(@RequestParam id: Long): ResponseEntity<UserDto> = ResponseEntity.ok().body(service.getUser(id))
+    fun getUser(@RequestParam id: Long): ResponseEntity<UserDto> = ResponseEntity.ok().body(service.getUserId(id))
 
     @GetMapping("/all")
     fun getAllUsers(): ResponseEntity<List<UserDto>> = ResponseEntity.ok().body(service.getAllUsers())
