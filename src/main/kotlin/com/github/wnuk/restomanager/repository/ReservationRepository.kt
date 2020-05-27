@@ -8,7 +8,7 @@ import java.sql.Time
 import java.util.*
 
 @Repository
-interface ReservationRepository  : JpaRepository<ReservationDao, Long> {
+interface ReservationRepository: JpaRepository<ReservationDao, Long> {
     fun findAllByCreatedBy(name: Long): MutableList<ReservationDao>?
     fun findAllByDateBetween(from: Date, to: Date): MutableList<ReservationDao>?
     fun findAllByTimeBetweenAndDateEquals(from: Time, to:Time, date: Date): MutableList<ReservationDao>?

@@ -9,6 +9,5 @@ interface ReservationService {
     fun getReservationByDate(from: Long, to: Long): List<ReservationDto>?
     fun getReservationByHours(from: Long, to: Long, date: Long): List<ReservationDto>?
     fun getReservationByDateAndDate(fromDate: Long, toDate: Long, fromTime: Long, toTime: Long): List<ReservationDto>?
-
     fun getAllReservations(): List<ReservationDto>?
 }
