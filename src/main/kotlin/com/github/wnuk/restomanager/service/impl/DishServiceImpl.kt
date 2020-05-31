@@ -24,8 +24,15 @@ class DishServiceImpl(private val repository: DishRepository): DishService {
     }
 
     override fun updatePrice(id: Long, price: Double): DishDto {
-        var dishDao = repository.findById(id)
+        val dishDao = repository.findById(id)
         dishDao.get().price = price
+        repository.save(dishDao.get())
+        return dishDao.get().toDishDto()
+    }
+
+    override fun updateDish(dish: DishDto): DishDto {
+        val dishDao = repository.findById(dish.id)
+        dishDao.get().price = dish.price
         repository.save(dishDao.get())
         return dishDao.get().toDishDto()
     }

@@ -7,6 +7,7 @@ interface DishService {
     fun deleteDish(dish: DishDto)
     fun deleteDishById(id: Long)
     fun updatePrice(id: Long, price: Double): DishDto
+    fun updateDish(dish: DishDto): DishDto
     fun getDishByName(name: String): List<DishDto>
     fun getAllDishes(): List<DishDto>
 }
