@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/dish")
-class DishController(private val service: DishService){
+class DishController(private val service: DishService) {
 
     @PostMapping("/add")
     fun createDish(@RequestBody dish: DishDto): ResponseEntity<DishDto> = ResponseEntity.ok(service.createDish(dish))
 
     @DeleteMapping("/delete")
-    fun deleteUser(@RequestParam id: Long): ResponseEntity<String>  {
+    fun deleteUser(@RequestParam id: Long): ResponseEntity<String> {
         service.deleteDishById(id)
         return ResponseEntity.accepted().body("AA")
     }

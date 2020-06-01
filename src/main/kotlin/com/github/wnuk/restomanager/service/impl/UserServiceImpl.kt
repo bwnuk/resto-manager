@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(private val repository: UserRepository): UserService {
+class UserServiceImpl(private val repository: UserRepository) : UserService {
     private val log = LoggerFactory.getLogger(UserServiceImpl::class.java)
 
     override fun deleteUser(id: Long) {
@@ -17,10 +17,6 @@ class UserServiceImpl(private val repository: UserRepository): UserService {
     }
 
     override fun createUser(user: UserDto): UserDto {
-/*        if (repository.findAllByUsername(user.username).isNullOrEmpty()){
-            TODO()
-        }*/
-
         val userDao = user.toUserDao()
         repository.save(userDao)
 

@@ -4,7 +4,7 @@ import com.github.wnuk.restomanager.dao.ROLE
 import com.github.wnuk.restomanager.dao.UserDao
 
 
-data class UserDto (
+data class UserDto(
         var id: Long = -1,
         val username: String = "",
         val firstname: String = "",

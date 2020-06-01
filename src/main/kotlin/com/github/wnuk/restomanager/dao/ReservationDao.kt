@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 @Table
-data class ReservationDao (
+data class ReservationDao(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0,
         @get: NotBlank

@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class HelloController{
+class HelloController {
 
     @GetMapping("/status")
-    fun statusServer(): ResponseEntity<String>{
+    fun statusServer(): ResponseEntity<String> {
         return ResponseEntity.ok("Hello World")
     }
 }

@@ -22,7 +22,7 @@ data class UserDao(
 )
 
 
-enum class ROLE{
+enum class ROLE {
     MANAGER,
     CHEF,
     WAITER

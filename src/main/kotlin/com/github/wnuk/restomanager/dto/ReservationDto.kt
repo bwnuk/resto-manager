@@ -1,14 +1,8 @@
 package com.github.wnuk.restomanager.dto
 
-import com.github.wnuk.restomanager.dao.ROLE
 import com.github.wnuk.restomanager.dao.ReservationDao
-import com.github.wnuk.restomanager.dao.UserDao
 import java.sql.Date
 import java.sql.Time
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.validation.constraints.NotBlank
 
 data class ReservationDto(
         val id: Long = 0,

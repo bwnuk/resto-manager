@@ -8,7 +8,7 @@ import com.github.wnuk.restomanager.service.DishService
 import org.springframework.stereotype.Service
 
 @Service
-class DishServiceImpl(private val repository: DishRepository): DishService {
+class DishServiceImpl(private val repository: DishRepository) : DishService {
     override fun createDish(dish: DishDto): DishDto {
         val dishDao = dish.toDishDao()
         repository.save(dishDao)
