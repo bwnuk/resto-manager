@@ -10,10 +10,10 @@ import javax.validation.constraints.NotBlank
 data class DishDao(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
-        @get: NotBlank
-        val name: String,
-        @get: NotBlank
-        var price: Double
+        @Column()
+        val name: String = "",
+        @Column()
+        var price: Double = 0.0
 )
 
 fun DishDao.toDishDto() = DishDto(

@@ -14,9 +14,9 @@ class UserController(private var service: UserService) {
 
 
     @DeleteMapping("/delete")
-    fun deleteUser(@RequestParam id: Long): ResponseEntity<String> {
+    fun deleteUser(@RequestParam id: Long): ResponseEntity<Long> {
         service.deleteUser(id)
-        return ResponseEntity.accepted().body("AA")
+        return ResponseEntity.accepted().body(id)
     }
 
     @GetMapping("")

@@ -13,15 +13,15 @@ class DishController(private val service: DishService) {
     fun createDish(@RequestBody dish: DishDto): ResponseEntity<DishDto> = ResponseEntity.ok(service.createDish(dish))
 
     @DeleteMapping("/delete")
-    fun deleteUser(@RequestParam id: Long): ResponseEntity<String> {
+    fun deleteUser(@RequestParam id: Long): ResponseEntity<Long> {
         service.deleteDishById(id)
-        return ResponseEntity.accepted().body("AA")
+        return ResponseEntity.accepted().body(id)
     }
 
     @PostMapping("/update")
     fun updateDish(@RequestBody dish: DishDto): ResponseEntity<DishDto> = ResponseEntity.ok(service.updateDish(dish))
 
-    @PostMapping("/update")
+    @PostMapping("/update/price")
     fun updateDish(@RequestParam id: Long, @RequestParam price: Double): ResponseEntity<DishDto> = ResponseEntity.ok(service.updatePrice(id, price))
 
     @GetMapping("")

@@ -14,16 +14,16 @@ class ReservationController(private var service: ReservationService) {
             ResponseEntity.accepted().body(service.createReservation(reservation))
 
     @DeleteMapping("/delete")
-    fun deleteReservation(@RequestParam id: Long): ResponseEntity<String> {
+    fun deleteReservation(@RequestParam id: Long): ResponseEntity<Long> {
         service.deleteReservation(id)
-        return ResponseEntity.accepted().body("AA")
+        return ResponseEntity.accepted().body(id)
     }
 
     @GetMapping("")
     fun getReservationById(@RequestParam id: Long): ResponseEntity<ReservationDto> =
             ResponseEntity.ok().body(service.getReservationById(id))
 
-    @GetMapping("")
+    @GetMapping("/time")
     fun getReservationByDate(@RequestParam from: Long, @RequestParam(required = false) to: Long): ResponseEntity<List<ReservationDto>> =
             ResponseEntity.ok().body(service.getReservationByDate(from, to))
 

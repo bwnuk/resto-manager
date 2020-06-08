@@ -12,17 +12,17 @@ import javax.validation.constraints.NotBlank
 data class ReservationDao(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0,
-        @get: NotBlank
+        @Column()
         val createdBy: Long = 0,
-        @get: NotBlank
+        @Column()
         val tableId: Long = 0,
-        @get: NotBlank
-        val date: Date = Date.valueOf("11-11-2020"),
-        @get: NotBlank
-        val time: Time = Time.valueOf("00:00")
+        @Column()
+        val date: Date = Date.valueOf("2020-11-11"),
+        @Column()
+        val time: Time = Time.valueOf("00:00:00")
 )
 
-fun ReservationDao.toReservationDto(createdBy: UserDto) = ReservationDto(
+fun ReservationDao.toReservationDto() = ReservationDto(
         id = id,
         createdBy = createdBy,
         tableId = tableId,

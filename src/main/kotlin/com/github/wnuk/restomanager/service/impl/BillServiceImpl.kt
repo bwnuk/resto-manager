@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class BillServiceImpl(private val repository: BillRepository,
-                      private val dishRepository: DishRepository,
                       private val userRepository: UserRepository) : BillService {
     override fun addBill(bill: BillDto): BillDto {
-        TODO()
+        val userDao = userRepository.findById(bill.user).get()
+        val billDao = bill.toBillDao(userDao)
+        repository.save(billDao)
+        return billDao.toBillDto()
     }
 
     override fun getBillById(id: Long): BillDto {
