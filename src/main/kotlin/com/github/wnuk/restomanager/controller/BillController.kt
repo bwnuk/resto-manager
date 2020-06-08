@@ -13,6 +13,9 @@ class BillController(private val service: BillService) {
     @GetMapping("/all")
     fun getAllDishes(): ResponseEntity<List<BillDto>> = ResponseEntity.ok(service.getBills())
 
+    @GetMapping("/")
+    fun getDishById(@RequestParam id: Long): ResponseEntity<BillDto> = ResponseEntity.ok(service.getBillById(id))
+
     @PostMapping("/add")
     fun addBill(@RequestBody billDto: BillDto): ResponseEntity<BillDto> = ResponseEntity.ok(service.addBill(billDto))
 }

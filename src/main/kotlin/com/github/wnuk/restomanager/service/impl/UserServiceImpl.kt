@@ -6,6 +6,7 @@ import com.github.wnuk.restomanager.dto.toUserDao
 import com.github.wnuk.restomanager.exception.CustomException
 import com.github.wnuk.restomanager.repository.UserRepository
 import com.github.wnuk.restomanager.service.UserService
+import com.github.wnuk.restomanager.utils.UserValidator
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
@@ -23,6 +24,7 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
 
     override fun createUser(user: UserDto): UserDto {
         val userDao = user.toUserDao()
+        UserValidator.checkPassword(user.password)
         repository.save(userDao)
 
         return userDao.toUserDto()
