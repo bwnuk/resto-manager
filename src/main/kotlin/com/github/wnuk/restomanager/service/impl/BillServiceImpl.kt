@@ -3,6 +3,7 @@ package com.github.wnuk.restomanager.service.impl
 import com.github.wnuk.restomanager.dao.toBillDto
 import com.github.wnuk.restomanager.dto.BillDto
 import com.github.wnuk.restomanager.dto.toBillDao
+import com.github.wnuk.restomanager.exception.CustomException
 import com.github.wnuk.restomanager.repository.BillRepository
 import com.github.wnuk.restomanager.repository.DishRepository
 import com.github.wnuk.restomanager.repository.UserRepository
@@ -21,10 +22,13 @@ class BillServiceImpl(private val repository: BillRepository,
 
     override fun getBillById(id: Long): BillDto {
         val bill = repository.findById(id)
+        if (bill.isEmpty){
+            throw CustomException("Reservation Not Found")
+        }
         return bill.get().toBillDto()
     }
 
     override fun getBills(): List<BillDto> {
-        return repository.findAll().map { it.toBillDto() }
+        return repository.findAll().map { it.toBillDto() }.ifEmpty { throw CustomException("Reservation Not Found") }
     }
 }

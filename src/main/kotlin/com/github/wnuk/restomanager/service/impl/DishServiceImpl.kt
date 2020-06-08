@@ -3,6 +3,7 @@ package com.github.wnuk.restomanager.service.impl
 import com.github.wnuk.restomanager.dao.toDishDto
 import com.github.wnuk.restomanager.dto.DishDto
 import com.github.wnuk.restomanager.dto.toDishDao
+import com.github.wnuk.restomanager.exception.CustomException
 import com.github.wnuk.restomanager.repository.DishRepository
 import com.github.wnuk.restomanager.service.DishService
 import org.springframework.stereotype.Service
@@ -16,32 +17,52 @@ class DishServiceImpl(private val repository: DishRepository) : DishService {
     }
 
     override fun deleteDish(dish: DishDto) {
-        repository.delete(dish.toDishDao())
+        val dishDao = repository.findById(dish.id)
+        if (dishDao.isEmpty){
+            throw CustomException("Dish Not Found")
+        }
+        dishDao.ifPresent { repository.delete(dish.toDishDao()) }
     }
 
     override fun deleteDishById(id: Long) {
-        repository.deleteById(id)
+        val dishDao = repository.findById(id)
+        if (dishDao.isEmpty){
+            throw CustomException("Dish Not Found")
+        }
+        dishDao.ifPresent { repository.deleteById(id) }
     }
 
     override fun updatePrice(id: Long, price: Double): DishDto {
         val dishDao = repository.findById(id)
-        dishDao.get().price = price
-        repository.save(dishDao.get())
+        if (dishDao.isEmpty){
+            throw CustomException("Dish Not Found")
+        }
+
+        dishDao.ifPresent {
+            it.price = price
+            repository.save(it)
+        }
         return dishDao.get().toDishDto()
     }
 
     override fun updateDish(dish: DishDto): DishDto {
         val dishDao = repository.findById(dish.id)
-        dishDao.get().price = dish.price
-        repository.save(dishDao.get())
+        if (dishDao.isEmpty){
+            throw CustomException("Dish Not Found")
+        }
+        dishDao.ifPresent {
+            it.price = dish.price
+            repository.save(it)
+        }
+
         return dishDao.get().toDishDto()
     }
 
     override fun getDishByName(name: String): List<DishDto> {
-        return repository.findAllByNameContains(name).map { it.toDishDto() }
+        return repository.findAllByNameContains(name).map { it.toDishDto() }.ifEmpty { return emptyList() }
     }
 
     override fun getAllDishes(): List<DishDto> {
-        return repository.findAll().map { it.toDishDto() }
+        return repository.findAll().map { it.toDishDto() }.ifEmpty {  throw CustomException("No dishes")}
     }
 }

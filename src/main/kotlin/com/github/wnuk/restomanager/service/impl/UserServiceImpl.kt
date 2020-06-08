@@ -3,6 +3,7 @@ package com.github.wnuk.restomanager.service.impl
 import com.github.wnuk.restomanager.dao.toUserDto
 import com.github.wnuk.restomanager.dto.UserDto
 import com.github.wnuk.restomanager.dto.toUserDao
+import com.github.wnuk.restomanager.exception.CustomException
 import com.github.wnuk.restomanager.repository.UserRepository
 import com.github.wnuk.restomanager.service.UserService
 import org.slf4j.LoggerFactory
@@ -13,6 +14,10 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
     private val log = LoggerFactory.getLogger(UserServiceImpl::class.java)
 
     override fun deleteUser(id: Long) {
+        val user = repository.findById(id)
+        if (user.isEmpty) {
+            throw CustomException("User Not Found")
+        }
         repository.deleteById(id)
     }
 
@@ -25,13 +30,15 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
 
     override fun getUserId(id: Long): UserDto? {
         val user = repository.findById(id)
-        user.let {
-            return it.get().toUserDto()
+        if (user.isEmpty) {
+            throw CustomException("User Not Found")
         }
+
+        return user.get().toUserDto()
     }
 
     override fun getAllUsers(): List<UserDto> {
-        return repository.findAll().map { it.toUserDto() }
+        return repository.findAll().map { it.toUserDto() }.ifEmpty { throw CustomException("User Not Found") }
     }
 
     override fun getUserByUsername(username: String): UserDto? {
